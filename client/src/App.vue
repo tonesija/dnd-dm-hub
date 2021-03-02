@@ -77,4 +77,13 @@
   padding-left: 7%;
   padding-right: 7%;
 }
+
+.separator {
+    height: 5px;
+    width: 100%;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    background-image: linear-gradient(to right, red , rgba(255, 255, 255, 0));
+
+}
 </style>

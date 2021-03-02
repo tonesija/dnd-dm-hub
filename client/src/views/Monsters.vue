@@ -2,12 +2,18 @@
   <div class="view">
     <p>Monsters</p>
 
+    <b-field grouped group-multiline>
+      <b-button label="Reset filters" @click="resetFilters"></b-button>
+    </b-field>
+
     <b-table
     :data="data"
     paginated
     :total="total"
     :per-page="perPage"
     :loading="loading"
+    hoverable
+    @click="rowClicked"
     
     @page-change="onPageChange"
     backend-pagination
@@ -16,15 +22,24 @@
     @filters-change="onFilter"
     
     backend-sorting
-    :default-sort-direction="'desc'"
-    :default-sort="['name', 'desc']"
+    :default-sort-direction="'asc'"
+    :default-sort="['name', 'asc']"
     @sort="onSort">
 
-    <b-table-column field="name" label="Name" sortable searchable v-slot="props">
-        {{ props.row.name }}
+    <b-table-column field="name" label="Name" sortable searchable>
+      <template
+          #searchable="props">
+          <b-input
+              v-model="props.filters['name']"
+              placeholder="Search..."
+              size="is-small" />
+      </template>
+      <template v-slot="props">
+          {{ props.row['name'] }}
+      </template>
     </b-table-column>
 
-    <b-table-column field="challenge_rating" label="CR" sortable width="40" numeric v-slot="props">
+    <b-table-column field="challenge_rating" label="CR" sortable searchable width="100" numeric v-slot="props">
         {{ props.row.challenge_rating }}
     </b-table-column>
 
@@ -50,7 +65,8 @@ export default {
       total: 0,
       page: 1,
       loading: false,
-      filter: null
+      filter: null,
+      cr: null
     }
   },
 
@@ -69,19 +85,39 @@ export default {
     },
 
     onFilter(filter) {
-      this.filter = filter.name
+      if(filter.name){
+        this.filter = filter.name
+        console.log('Filtering by Name!', this.filter)
+      } else this.filter = null
+
+      if(filter.challenge_rating){
+        this.cr = filter.challenge_rating
+        console.log('Filtering by CR!', this.cr)
+      } else this.cr = null
+
       this.loadAsyncData()
     },
 
     async loadAsyncData() {
       this.loading = true
 
-      let data = (await MonstersService.getMonsters(this.page, this.perPage, this.sortField, this.sortOrder, this.filter))
+      let data = (await MonstersService.getMonsters(this.page, this.perPage, this.sortField, this.sortOrder, this.filter, this.cr))
         .data
       this.data = data.results
       this.total = data.count
 
       this.loading = false
+    },
+
+    resetFilters(){
+      this.cr = null
+      this.filter = null
+      this.loadAsyncData()
+    },
+
+    rowClicked(row) {
+      console.log('Row clicker, ', row)
+      this.$router.push('/monsters/' + row.slug)
     }
   },
 

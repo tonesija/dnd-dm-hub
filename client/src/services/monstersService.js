@@ -5,7 +5,7 @@ export default {
         return api().get('monsters')
     },
 
-    getMonsters(page, perPage, sortField, sortOrder, searchText) {
+    getMonsters(page, perPage, sortField, sortOrder, searchText, cr) {
         let sortPrefix = '-'
         if(sortOrder != 'desc') sortPrefix = ''
         let ordering = sortPrefix + sortField
@@ -14,8 +14,13 @@ export default {
             page: page,
             limit: perPage,
             ordering: ordering,
-            search: searchText
+            search: searchText,
+            challenge_rating: cr
         }
         return api().get('monsters/', {params: params})
+    },
+
+    getMonster(slug) {
+        return api().get('monsters/' + slug)
     }
 }
