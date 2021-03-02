@@ -5,9 +5,9 @@
 
     <div class="separator"></div>
 
-    <p>Armor Class: {{monster.armor_class}}</p>
-    <p>Hit Points: {{monster.hit_points}}</p>
-    <p>Speed: {{getSpeedString(monster.speed)}}</p>
+    <p><strong>Armor Class:</strong>  {{monster.armor_class}}</p>
+    <p><strong>Hit Points:</strong>  {{monster.hit_points}}</p>
+    <p><strong>Speed:</strong>  {{getSpeedString(monster.speed)}}</p>
 
     <div class="separator"></div>
 
@@ -35,7 +35,20 @@
 
     <div class="separator"></div>
 
-    <p>Saving throws: {{getSavingThrowsString(monster)}}</p>
+    <p><strong>Saving throws:</strong> {{getSavingThrowsString(monster)}}</p>
+    <p><strong>Skills:</strong>  {{getSkillsString(monster)}}</p>
+    <p><strong>Damage Resistances:</strong>  {{monster.damage_resistances}}</p>
+    <p><strong>Damage Immunities:</strong>  {{monster.damage_immunities}}</p>
+    <p><strong>Senses:</strong>  {{monster.senses}}</p>
+    <p><strong>Languages:</strong>  {{monster.languages}}</p>
+    <p><strong>Challenge:</strong>  {{monster.challenge_rating}} ({{getXPFromCR(monster.challenge_rating)}} XP)</p>
+
+    <div class="separator"></div>
+
+    <p class="sub-title title-footer">Actions</p>
+    <div v-for="action in monster.actions" :key="action.name">
+      <p class="action-text"><strong>{{action.name}}.</strong> {{action.desc}}</p>
+    </div>
 
     <p>{{monster}}</p>
   </div>
@@ -44,6 +57,7 @@
 <script>
 import MonstersService from '../services/monstersService'
 
+import Utility from '../utility'
 export default {
   name: 'Monster',
 
@@ -60,7 +74,7 @@ export default {
       for(let key in speed){
         str += key + ': ' + speed[key]/5 + ', '
       }
-      return str
+      return this.removeComma(str)
     },
     getAbilityData(monster) {
       this.abilityData = []
@@ -80,15 +94,27 @@ export default {
         let ability = key.substring(0,3)
         let num = this.getModifier(monster[key.toLowerCase()])
         if(monster[key.toLowerCase()+'_save']){
-          num += monster[key.toLowerCase()+'_save']
+          num = monster[key.toLowerCase()+'_save']
         }
-        console.log(ability)
         str += ability + ': ' + num + ', '
       }
-      return str
+      return this.removeComma(str)
+    },
+    getSkillsString(monster){
+      let str = ''
+      for(let key in monster.skills){
+        str += key + ': ' + monster.skills[key] + ', '
+      }
+      return this.removeComma(str)
     },
     getModifier(abilityScore){
-      return (abilityScore - 10)/2
+      return Math.floor((abilityScore - 10)/2)
+    },
+    getXPFromCR(cr){
+      return Utility.getXPFromCR(cr)
+    },
+    removeComma(str){
+      return str.substring(0, str.length - 2)
     }
   },
 
@@ -101,3 +127,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+  .action-text {
+    margin-top: 4px;
+  }
+</style>

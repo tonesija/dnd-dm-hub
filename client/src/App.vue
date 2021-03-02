@@ -78,12 +78,18 @@
   padding-right: 7%;
 }
 
+.sub-title {
+    font-size: 20px;
+    font-weight: 600;
+}
+.title-footer {
+    border-bottom: red 4px solid;
+}
 .separator {
     height: 5px;
     width: 100%;
     margin-top: 15px;
     margin-bottom: 15px;
     background-image: linear-gradient(to right, red , rgba(255, 255, 255, 0));
-
 }
 </style>

@@ -20,7 +20,7 @@
 
 <script>
 export default {
-  name: 'Treasure generator',
+  name: 'TreasureGenerator',
 
   data() {
     return {
