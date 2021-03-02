@@ -39,7 +39,7 @@
       </template>
     </b-table-column>
 
-    <b-table-column field="challenge_rating" label="CR" sortable searchable width="100" numeric v-slot="props">
+    <b-table-column field="challenge_rating" label="CR" sortable :custom-sort="crSort" searchable width="100" numeric v-slot="props">
         {{ props.row.challenge_rating }}
     </b-table-column>
 
@@ -96,6 +96,13 @@ export default {
       } else this.cr = null
 
       this.loadAsyncData()
+    },
+
+    crSort(a, b, isAsc){
+      if(isAsc)
+      return a.challenge_rating < b.challenge_rating
+      else
+      return a.challenge_rating > b.challenge_rating
     },
 
     async loadAsyncData() {
