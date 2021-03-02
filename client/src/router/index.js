@@ -24,12 +24,16 @@ const routes = [
     path: '/monsters',
     name: 'Monsters',
     component: () => import(/* webpackChunkName: "about" */ '../views/Monsters.vue')
-  }
-  ,
+  },
   {
     path: '/monsters/:slug',
     name: 'Monster',
     component: () => import(/* webpackChunkName: "about" */ '../views/Monster.vue')
+  },
+  {
+    path: '/combat-tracker',
+    name: 'Combat tracker',
+    component: () => import(/* webpackChunkName: "about" */ '../views/CombatTracker.vue')
   }
 ]
 
