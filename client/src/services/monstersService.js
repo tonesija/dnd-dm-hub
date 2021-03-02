@@ -2,7 +2,7 @@ import api from './api'
 
 export default {
     getAllMonsters () {
-        return api().get('monsters')
+        return api().get('monsters/')
     },
 
     getMonsters(page, perPage, sortField, sortOrder, searchText, cr) {
