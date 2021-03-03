@@ -92,4 +92,8 @@
     margin-bottom: 15px;
     background-image: linear-gradient(to right, red , rgba(255, 255, 255, 0));
 }
+
+.float-right{
+    margin-left: 0.5rem;
+}
 </style>

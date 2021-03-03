@@ -4,7 +4,8 @@
 
     <b-table
     :data="data"
-    hoverable>
+    hoverable
+    narrowed>
       <b-table-column field="name" label="Name" sortable v-slot="props">
         {{props.row.name}}
       </b-table-column>
@@ -22,7 +23,7 @@
       </b-table-column>
 
       <b-table-column width="100" v-slot="props">
-          <b-button @click="remove(props.row)">X</b-button>
+          <b-button @click="remove(props.row)" icon-left="trash-alt"></b-button>
       </b-table-column>
     </b-table>
 
@@ -49,12 +50,17 @@
             <b-input maxlength="2" placeholder="HP" v-model="newHP"></b-input>
         </b-field>
         <b-field expanded>
-            <b-button type="is-primary" @click="addCreature">Add</b-button>
+            <b-button type="is-primary" @click="addCreature" icon-left="plus"></b-button>
         </b-field>
     </b-field>
 
-    <b-tabs v-if="monsters.length != 0" v-model="activeTab">
-        <b-tab-item v-for="mon in monsters" :key="mon.slug" :label="mon.name">
+    <p class="sub-title title-footer">Monster sheets</p>
+    <b-tabs type="is-boxed"
+      v-if="monsters.length != 0" v-model="activeTab">
+        <b-tab-item v-for="mon in monsters" :key="mon.slug">
+            <template #header class="tab-header">
+                <span> {{mon.name}} </span> <button @click="removeTab(mon.slug)" class="delete float-right"></button> 
+            </template>
             <Monster :monster="mon"></Monster>
         </b-tab-item>
     </b-tabs>
@@ -164,6 +170,17 @@ export default {
       }
       this.data.splice(index, 1)
     },
+    removeTab(slug){
+      console.log("click")
+      let i = 0
+      for(let mon of this.monsters){
+        if(slug == mon.slug){
+          break
+        }
+        i++
+      }
+      this.monsters.splice(i, 1)
+    },
     toast(msg) {
       this.$buefy.toast.open({
           duration: 1500,
@@ -194,3 +211,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+  .tab-header {
+    padding: 0px;
+  }
+</style>
