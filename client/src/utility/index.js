@@ -23,4 +23,14 @@ function getXPFromCR(cr){
     return xpMap[cr]
 }
 
+function isMonsterInArray(slug, monsters){
+    for(let mon of monsters){
+        console.log(mon.slug)
+        console.log(slug)
+        if(slug == mon.slug) return true
+    }
+    return false
+}
+
 exports.getXPFromCR = getXPFromCR
+exports.isMonsterInArray = isMonsterInArray

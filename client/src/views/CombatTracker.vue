@@ -66,6 +66,7 @@ import MonstersService from '../services/monstersService'
 
 import Monster from '../components/Monster'
 
+import Utility from '../utility'
 export default {
   name: 'Monsters',
 
@@ -106,6 +107,7 @@ export default {
 
       if(!this.isPlayer)
       MonstersService.getMonster(this.newSlug).then((res => {
+        if(!Utility.isMonsterInArray(this.newSlug, this.monsters))
         this.monsters.push(res.data)
       })).catch(() => {
         //ignore
