@@ -31,8 +31,7 @@
           #searchable="props">
           <b-input
               v-model="props.filters['name']"
-              placeholder="Search..."
-              size="is-small" />
+              placeholder="Search..."/>
       </template>
       <template v-slot="props">
           {{ props.row['name'] }}

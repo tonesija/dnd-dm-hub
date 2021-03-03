@@ -1,6 +1,8 @@
 <template>
   <div class="view">
-    <MonsterInfo v-if="mon" :monster="mon"></MonsterInfo>
+    <div v-if="mon">
+      <MonsterInfo :monster="mon"></MonsterInfo>
+    </div>
   </div>
 </template>
 
@@ -13,7 +15,7 @@ export default {
 
   data() {
     return {
-      mon: {}
+      mon: null
     }
   },
 

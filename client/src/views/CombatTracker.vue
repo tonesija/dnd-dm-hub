@@ -29,28 +29,32 @@
 
     <div class="separator"></div>
 
-    <b-field grouped label="Add a creature">
-        <b-field>
+    <b-field grouped group-multiline label="Add a creature">
+        <b-field class="margin-top">
             <b-checkbox v-model="isPlayer"></b-checkbox>
         </b-field>
-        <b-field label="Creature" label-position="on-border">
+        <b-field class="margin-top" label="Creature" label-position="on-border">
             <b-autocomplete 
             placeholder="Creature name" 
             v-model="newName"
             :loading="isFetching"
             @typing="getAsyncData"
             @select="onAutocompleteSelect"
-            :data="autocompleteNames">
+            :data="autocompleteNames"
+            expanded>
           </b-autocomplete>
         </b-field>
-        <b-field label="Initiative" label-position="on-border" expanded>
-            <b-input maxlength="2" placeholder="Initiative" v-model="newInitiative"></b-input>
+        <b-field class="margin-top" label="Initiative" label-position="on-border">
+            <b-numberinput controls-position="compact"
+            v-model="newInitiative"></b-numberinput>
         </b-field>
-        <b-field label="Hit points" label-position="on-border" expanded>
-            <b-input maxlength="2" placeholder="HP" v-model="newHP"></b-input>
+        <b-field class="margin-top" label="Hit points" label-position="on-border">
+            <b-numberinput controls-position="compact"
+            v-model="newHP"></b-numberinput>
         </b-field>
-        <b-field expanded>
-            <b-button type="is-primary" @click="addCreature" icon-left="plus"></b-button>
+  
+        <b-field class="margin-top" expanded>
+            <b-button type="is-primary" @click="addCreature" icon-right="plus">Add</b-button>
         </b-field>
     </b-field>
 
@@ -215,5 +219,8 @@ export default {
 <style scoped>
   .tab-header {
     padding: 0px;
+  }
+  .margin-top {
+    margin-top: 1em;
   }
 </style>
