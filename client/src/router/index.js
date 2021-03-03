@@ -28,7 +28,7 @@ const routes = [
   {
     path: '/monsters/:slug',
     name: 'Monster',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Monster.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/MonsterView.vue')
   },
   {
     path: '/combat-tracker',

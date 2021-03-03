@@ -1,5 +1,5 @@
 <template>
-  <div class="view" v-if="monster">
+  <div class="" v-if="monster">
     <p class="title">{{monster.name}}</p>
     <p>{{monster.size}}, {{monster.type}}</p>
 
@@ -55,17 +55,18 @@
 </template>
 
 <script>
-import MonstersService from '../services/monstersService'
-
 import Utility from '../utility'
 export default {
   name: 'Monster',
 
   data() {
     return {
-      monster: null,
       abilityData: []
     }
+  },
+
+  props: {
+    monster: Object
   },
 
   methods: {
@@ -118,8 +119,7 @@ export default {
     }
   },
 
-  created: async function() {
-    this.monster = (await MonstersService.getMonster(this.$route.params.slug)).data
+  created: function() {
     this.getAbilityData(this.monster)
   },
 

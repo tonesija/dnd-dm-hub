@@ -29,8 +29,18 @@
     <div class="separator"></div>
 
     <b-field grouped label="Add a creature">
-        <b-field label="Monster name" label-position="on-border">
-            <b-input placeholder="Monster name" v-model="newName"></b-input>
+        <b-field>
+            <b-checkbox v-model="isPlayer"></b-checkbox>
+        </b-field>
+        <b-field label="Creature" label-position="on-border">
+            <b-autocomplete 
+            placeholder="Creature name" 
+            v-model="newName"
+            :loading="isFetching"
+            @typing="getAsyncData"
+            @select="onAutocompleteSelect"
+            :data="autocompleteNames">
+          </b-autocomplete>
         </b-field>
         <b-field label="Initiative" label-position="on-border" expanded>
             <b-input maxlength="2" placeholder="Initiative" v-model="newInitiative"></b-input>
@@ -43,19 +53,35 @@
         </b-field>
     </b-field>
 
+    <b-tabs v-if="monsters.length != 0" v-model="activeTab">
+        <b-tab-item v-for="mon in monsters" :key="mon.slug" :label="mon.name">
+            <Monster :monster="mon"></Monster>
+        </b-tab-item>
+    </b-tabs>
   </div>
 </template>
 
 <script>
+import MonstersService from '../services/monstersService'
+
+import Monster from '../components/Monster'
+
 export default {
   name: 'Monsters',
 
   data() {
     return {
       data: [],
+      autocompleteData: [],
+      autocompleteNames: [],
       newName: null,
       newInitiative: null,
-      newHP: null
+      newHP: null,
+      newSlug: null,
+      isPlayer: false,
+      isFetching: false,
+      monsters: [],
+      activeTab: 0
     }
   },
 
@@ -78,6 +104,14 @@ export default {
       }
       this.data.push(newCreature)
 
+      if(!this.isPlayer)
+      MonstersService.getMonster(this.newSlug).then((res => {
+        this.monsters.push(res.data)
+      })).catch(() => {
+        //ignore
+        console.log("dobroee")
+      })
+      
       this.newName = null
       this.newInitiative = null
       this.newHP = null
@@ -87,6 +121,31 @@ export default {
       if(e.key == 'Enter'){
         this.addCreature()
       }
+    },
+    async getAsyncData(name){
+      if(this.isPlayer) return
+      if (!name.length) {
+        this.autocompleteNames = []
+        this.autocompleteData = []
+        return
+      }
+      this.isFetching = true
+      this.autocompleteData = (await MonstersService.getMonstersSearch(name)).data.results
+      this.autocompleteNames = this.autocompleteData.map((item) => {
+        return item.name
+      })
+      this.isFetching = false
+    },
+    async onAutocompleteSelect(name){
+      if(this.isPlayer) return
+      for(let mon of this.autocompleteData){
+        if(mon.name == name){
+          this.newSlug = mon.slug
+          break
+        }
+      }
+      let mon = (await MonstersService.getMonster(this.newSlug)).data
+      this.newHP = mon.hit_points
     },
 
     remove(row){
@@ -121,6 +180,10 @@ export default {
 
   destroyed() {
     window.removeEventListener("keydown", this.handleKeyPress)
+  },
+
+  components: {
+    Monster
   }
 }
 </script>

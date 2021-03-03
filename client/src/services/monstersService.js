@@ -20,6 +20,10 @@ export default {
         return api().get('monsters/', {params: params})
     },
 
+    getMonstersSearch(searchText){
+        return this.getMonsters(1, 10, null, null, searchText, null)
+    },
+
     getMonster(slug) {
         return api().get('monsters/' + slug)
     }
