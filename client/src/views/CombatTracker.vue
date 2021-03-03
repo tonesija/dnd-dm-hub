@@ -100,15 +100,20 @@ export default {
       }
       let newCreature = {
         name: this.newName,
+        baseName: this.newName,
         initiative: this.newInitiative,
         hp: this.newHP
       }
       this.data.push(newCreature)
+      Utility.addNumbering(this.data)
 
       if(!this.isPlayer)
       MonstersService.getMonster(this.newSlug).then((res => {
-        if(!Utility.isMonsterInArray(this.newSlug, this.monsters))
-        this.monsters.push(res.data)
+        if(!Utility.isMonsterInArray(this.newSlug, this.monsters)){
+          this.monsters.push(res.data)
+        }
+        
+        
       })).catch(() => {
         //ignore
         console.log("dobroee")

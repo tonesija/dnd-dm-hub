@@ -32,5 +32,20 @@ function isMonsterInArray(slug, monsters){
     return false
 }
 
+function addNumbering(monsters){
+    let ammountMap = new Map()
+    for(let mon of monsters){
+        ammountMap[mon.baseName] = 0
+    }
+    for(let mon of monsters){
+        ammountMap[mon.baseName]++
+    }
+    for(let i = monsters.length - 1; i >= 0; --i){
+        monsters[i].name = monsters[i].baseName + ' ' + ammountMap[monsters[i].baseName]
+        ammountMap[monsters[i].baseName]--
+    }
+}
+
 exports.getXPFromCR = getXPFromCR
 exports.isMonsterInArray = isMonsterInArray
+exports.addNumbering = addNumbering
