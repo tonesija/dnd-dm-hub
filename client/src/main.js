@@ -5,6 +5,8 @@ import store from './store'
 import Buefy from 'buefy'
 import 'buefy/dist/buefy.css'
 
+import './sass/mystyle.scss'
+
 import { library } from '@fortawesome/fontawesome-svg-core';
 // internal icons
 import { fas } from "@fortawesome/free-solid-svg-icons";
