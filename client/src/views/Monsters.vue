@@ -1,6 +1,6 @@
 <template>
   <div class="view">
-    <p>Monsters</p>
+    <p class="bold main-title">Monsters</p>
 
     <b-field grouped group-multiline>
       <b-button label="Reset filters" @click="resetFilters"></b-button>
@@ -13,7 +13,6 @@
     :per-page="perPage"
     :loading="loading"
     hoverable
-    @click="rowClicked"
     
     @page-change="onPageChange"
     backend-pagination
@@ -24,7 +23,9 @@
     backend-sorting
     :default-sort-direction="'asc'"
     :default-sort="['name', 'asc']"
-    @sort="onSort">
+    @sort="onSort"
+    
+    class="bold">
 
     <b-table-column field="name" label="Name" sortable searchable>
       <template
@@ -34,16 +35,30 @@
               placeholder="Search..."/>
       </template>
       <template v-slot="props">
-          {{ props.row['name'] }}
+        <router-link :to="'monsters/' + props.row.slug">
+          <span class="bold">
+            {{ props.row['name'] }}
+          </span>
+        </router-link>
+        
       </template>
     </b-table-column>
 
-    <b-table-column field="challenge_rating" label="CR" sortable :custom-sort="crSort" searchable width="100" numeric v-slot="props">
-        {{ props.row.challenge_rating }}
+    <b-table-column class="bold" field="challenge_rating" label="CR" sortable :custom-sort="crSort" searchable width="100" numeric v-slot="props">
+        <span class="bold">
+          {{ props.row.challenge_rating }}
+        </span>
+    </b-table-column>
+    <b-table-column class="bold" field="hit_points" label="Hit points" sortable width="100" numeric v-slot="props">
+        <span class="bold">
+          {{ props.row.hit_points }}
+        </span>
     </b-table-column>
 
     <b-table-column field="type" label="Type" sortable v-slot="props">
-        {{ props.row.type }}
+          <span>
+            {{ props.row['type'] }}
+          </span>
     </b-table-column>
 
     </b-table>
@@ -64,8 +79,8 @@ export default {
       total: 0,
       page: 1,
       loading: false,
-      filter: null,
-      cr: null
+      nameFilter: null,
+      crFilter: null
     }
   },
 
@@ -85,14 +100,14 @@ export default {
 
     onFilter(filter) {
       if(filter.name){
-        this.filter = filter.name
-        console.log('Filtering by Name!', this.filter)
-      } else this.filter = null
+        this.nameFilter = filter.name
+        console.log('Filtering by Name!', this.nameFilter)
+      } else this.nameFilter = null
 
       if(filter.challenge_rating){
-        this.cr = filter.challenge_rating
-        console.log('Filtering by CR!', this.cr)
-      } else this.cr = null
+        this.crFilter = filter.challenge_rating
+        console.log('Filtering by CR!', this.crFilter)
+      } else this.crFilter = null
 
       this.loadAsyncData()
     },
@@ -107,23 +122,21 @@ export default {
     async loadAsyncData() {
       this.loading = true
 
-      let data = (await MonstersService.getMonsters(this.page, this.perPage, this.sortField, this.sortOrder, this.filter, this.cr))
-        .data
+      let data = (await MonstersService.getMonsters(
+          this.page, this.perPage, this.sortField, this.sortOrder, 
+          this.nameFilter, this.crFilter)).data
       this.data = data.results
       this.total = data.count
+
+      console.log(this.data)
 
       this.loading = false
     },
 
     resetFilters(){
-      this.cr = null
-      this.filter = null
+      this.crFilter = null
+      this.nameFilter = null
       this.loadAsyncData()
-    },
-
-    rowClicked(row) {
-      console.log('Row clicker, ', row)
-      this.$router.push('/monsters/' + row.slug)
     }
   },
 
@@ -135,3 +148,7 @@ export default {
   }
 }
 </script>
+
+<style scoped lang="scss">
+
+</style>

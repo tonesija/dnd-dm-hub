@@ -10,13 +10,13 @@
             </b-navbar-item>
         </template>
         <template #start>
-            <b-navbar-item tag="router-link" :to="{path: '/'}">
+            <b-navbar-item class="bold" tag="router-link" :to="{path: '/'}">
                 Home
             </b-navbar-item>
-            <b-navbar-item tag="router-link" :to="{path: '/monsters'}">
+            <b-navbar-item class="bold" tag="router-link" :to="{path: '/monsters'}">
                 Monsters
             </b-navbar-item>
-            <b-navbar-dropdown label="Tools">
+            <b-navbar-dropdown class="bold" label="Tools">
                 <b-navbar-item tag="router-link" :to="{path: '/combat-tracker'}">
                     Combat tracker
                 </b-navbar-item>
@@ -24,7 +24,7 @@
                     Treasure generator
                 </b-navbar-item>
             </b-navbar-dropdown>
-            <b-navbar-dropdown label="Info">
+            <b-navbar-dropdown class="bold" label="Info">
                 <b-navbar-item href="#">
                     About
                 </b-navbar-item>
@@ -36,14 +36,7 @@
 
         <template #end>
             <b-navbar-item tag="div">
-                <div class="buttons">
-                    <a class="button is-primary">
-                        <strong>Sign up</strong>
-                    </a>
-                    <a class="button is-light">
-                        Log in
-                    </a>
-                </div>
+
             </b-navbar-item>
         </template>
     </b-navbar>
@@ -56,7 +49,7 @@
 @import './sass/myvars.scss';
 
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: $secondary-font;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
@@ -68,7 +61,7 @@
 
 #nav a {
   font-weight: bold;
-  color: #2c3e50;
+  color: $tertiary;
 }
 
 #nav a.router-link-exact-active {
@@ -80,8 +73,12 @@
   padding-right: 7%;
 }
 
+.main-title {
+    font-size: 28px;
+    font-weight: 600;
+}
 .sub-title {
-    font-size: 20px;
+    font-size: 22px;
     font-weight: 600;
 }
 .title-footer {
@@ -98,4 +95,12 @@
 .float-right{
     margin-left: 0.5rem;
 }
+
+.bold {
+    font-family: $primary-font;
+    color: $secondary;
+    font-weight: 600;
+}
+
+
 </style>

@@ -1,53 +1,65 @@
 <template>
   <div class="" v-if="monster">
-    <p class="title">{{monster.name}}</p>
-    <p>{{monster.size}}, {{monster.type}}</p>
+    <p class="bold main-title">{{monster.name}}</p>
+    <p class="bold">{{monster.size}}, {{monster.type}}</p>
 
     <div class="separator"></div>
 
-    <p><strong>Armor Class:</strong>  {{monster.armor_class}}</p>
-    <p><strong>Hit Points:</strong>  {{monster.hit_points}}</p>
-    <p><strong>Speed:</strong>  {{getSpeedString(monster.speed)}}</p>
+    <p><strong class="bold">Armor Class:</strong>  {{monster.armor_class}}</p>
+    <p><strong class="bold">Hit Points:</strong>  {{monster.hit_points}}</p>
+    <p><strong class="bold">Speed:</strong>  {{getSpeedString(monster.speed)}}</p>
 
     <div class="separator"></div>
 
     <b-table
       :data="abilityData">
       <b-table-column field="Strength" label="STR" v-slot="props" centered>
-        {{props.row.Strength}} ({{getModifier(props.row.Strength)}})
+        <span class="bold">
+          {{props.row.Strength}} ({{getModifier(props.row.Strength)}})
+        </span>
       </b-table-column>
       <b-table-column field="Dexterity" label="DEX" v-slot="props" centered>
-        {{props.row.Dexterity}} ({{getModifier(props.row.Dexterity)}})
+        <span class="bold">
+          {{props.row.Dexterity}} ({{getModifier(props.row.Dexterity)}})
+        </span>
       </b-table-column>
       <b-table-column field="Constitution" label="CON" v-slot="props" centered>
-        {{props.row.Constitution}} ({{getModifier(props.row.Constitution)}})
+        <span class="bold">
+          {{props.row.Constitution}} ({{getModifier(props.row.Constitution)}})
+        </span>
       </b-table-column>
       <b-table-column field="Intelligence" label="INT" v-slot="props" centered>
-        {{props.row.Intelligence}} ({{getModifier(props.row.Intelligence)}})
+        <span class="bold">
+          {{props.row.Intelligence}} ({{getModifier(props.row.Intelligence)}})
+        </span>
       </b-table-column>
       <b-table-column field="Wisdom" label="WIS" v-slot="props" centered>
-        {{props.row.Wisdom}} ({{getModifier(props.row.Wisdom)}})
+        <span class="bold">
+          {{props.row.Wisdom}} ({{getModifier(props.row.Wisdom)}})
+        </span>
       </b-table-column>
       <b-table-column field="Charisma" label="CHA" v-slot="props" centered>
-        {{props.row.Charisma}} ({{getModifier(props.row.Charisma)}})
+        <span class="bold">
+          {{props.row.Charisma}} ({{getModifier(props.row.Charisma)}})
+        </span>
       </b-table-column>
     </b-table>
 
     <div class="separator"></div>
 
-    <p><strong>Saving throws:</strong> {{getSavingThrowsString(monster)}}</p>
-    <p><strong>Skills:</strong>  {{getSkillsString(monster)}}</p>
-    <p><strong>Damage Resistances:</strong>  {{monster.damage_resistances}}</p>
-    <p><strong>Damage Immunities:</strong>  {{monster.damage_immunities}}</p>
-    <p><strong>Senses:</strong>  {{monster.senses}}</p>
-    <p><strong>Languages:</strong>  {{monster.languages}}</p>
-    <p><strong>Challenge:</strong>  {{monster.challenge_rating}} ({{getXPFromCR(monster.challenge_rating)}} XP)</p>
+    <p><strong class="bold">Saving throws:</strong> {{getSavingThrowsString(monster)}}</p>
+    <p><strong class="bold">Skills:</strong>  {{getSkillsString(monster)}}</p>
+    <p><strong class="bold">Damage Resistances:</strong>  {{monster.damage_resistances}}</p>
+    <p><strong class="bold">Damage Immunities:</strong>  {{monster.damage_immunities}}</p>
+    <p><strong class="bold">Senses:</strong>  {{monster.senses}}</p>
+    <p><strong class="bold">Languages:</strong>  {{monster.languages}}</p>
+    <p><strong class="bold">Challenge:</strong>  {{monster.challenge_rating}} ({{getXPFromCR(monster.challenge_rating)}} XP)</p>
 
     <div class="separator"></div>
 
-    <p class="sub-title title-footer">Actions</p>
+    <p class="sub-title title-footer bold">Actions</p>
     <div v-for="action in monster.actions" :key="action.name">
-      <p class="action-text"><strong>{{action.name}}.</strong> {{action.desc}}</p>
+      <p class="action-text"><strong class="bold">{{action.name}}.</strong> {{action.desc}}</p>
     </div>
 
     <p>{{monster}}</p>
@@ -128,7 +140,9 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+@import '../sass/myvars.scss';
+
   .action-text {
     margin-top: 4px;
   }
