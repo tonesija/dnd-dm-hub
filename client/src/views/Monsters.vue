@@ -2,10 +2,6 @@
   <div class="view">
     <p class="bold main-title">Monsters</p>
 
-    <b-field grouped group-multiline>
-      <b-button label="Reset filters" @click="resetFilters"></b-button>
-    </b-field>
-
     <b-table
     :data="data"
     paginated

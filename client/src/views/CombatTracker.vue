@@ -61,7 +61,7 @@
         </b-field>
     </b-field>
 
-    <p class="sub-title title-footer bold">Monster sheets</p>
+    <p class="sub-title title-footer bold margin-top">Monster sheets</p>
     <b-tabs type="is-boxed" class="bold"
       v-if="monsters.length != 0" v-model="activeTab">
         <b-tab-item v-for="mon in monsters" :key="mon.slug">

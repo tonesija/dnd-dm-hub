@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <b-navbar>
+    <b-navbar type="is-primary" shadow>
         <template #brand>
             <b-navbar-item tag="router-link" :to="{ path: '/' }">
                 <img
@@ -80,7 +80,6 @@
 .sub-title {
     font-size: 22px;
     font-weight: 600;
-    margin-top: 60px;
 }
 .text {
     color: rgb(51, 51, 51);
@@ -100,6 +99,9 @@
 
 .float-right{
     margin-left: 0.5rem;
+}
+.margin-bottom {
+    margin-bottom: 70px;
 }
 
 .bold {
