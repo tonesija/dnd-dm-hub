@@ -1,13 +1,16 @@
 <template>
   <div class="view">
-    <p class="title">Combat Tracker</p>
+    <p class="bold main-title">Combat Tracker</p>
 
     <b-table
     :data="data"
     hoverable
-    narrowed>
+    narrowed
+    class="bold">
       <b-table-column field="name" label="Name" sortable v-slot="props">
-        {{props.row.name}}
+        <span class="bold">
+          {{props.row.name}}
+        </span>
       </b-table-column>
 
       <b-table-column field="initiative" label="Initiative" :custom-sort="initiativeSort" sortable width="75" numeric v-slot="props">
@@ -18,8 +21,8 @@
           <b-input v-model="props.row.hp"></b-input>
       </b-table-column>
 
-      <b-table-column field="effects" label="Effects" v-slot="props">
-        <b-input v-model="props.row.effects"></b-input>
+      <b-table-column class="bold" field="effects" label="Effects" v-slot="props">
+        <b-input class="bold" v-model="props.row.effects"></b-input>
       </b-table-column>
 
       <b-table-column width="100" v-slot="props">
@@ -29,7 +32,7 @@
 
     <div class="separator"></div>
 
-    <b-field grouped group-multiline label="Add a creature">
+    <b-field class="bold" grouped group-multiline label="Add a creature">
         <b-field class="margin-top">
             <b-checkbox v-model="isPlayer"></b-checkbox>
         </b-field>
@@ -54,12 +57,12 @@
         </b-field>
   
         <b-field class="margin-top" expanded>
-            <b-button type="is-primary" @click="addCreature" icon-right="plus">Add</b-button>
+            <b-button class="bold" type="is-primary" @click="addCreature" icon-right="plus">Add</b-button>
         </b-field>
     </b-field>
 
-    <p class="sub-title title-footer">Monster sheets</p>
-    <b-tabs type="is-boxed"
+    <p class="sub-title title-footer bold">Monster sheets</p>
+    <b-tabs type="is-boxed" class="bold"
       v-if="monsters.length != 0" v-model="activeTab">
         <b-tab-item v-for="mon in monsters" :key="mon.slug">
             <template #header class="tab-header">

@@ -80,6 +80,12 @@
 .sub-title {
     font-size: 22px;
     font-weight: 600;
+    margin-top: 60px;
+}
+.text {
+    color: rgb(51, 51, 51);
+    font-size: 16px;
+    font-weight: 400;
 }
 .title-footer {
     border-bottom: $primary 4px solid;
@@ -101,6 +107,8 @@
     color: $secondary;
     font-weight: 600;
 }
+
+
 
 
 </style>

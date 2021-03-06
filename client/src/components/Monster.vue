@@ -5,9 +5,9 @@
 
     <div class="separator"></div>
 
-    <p><strong class="bold">Armor Class:</strong>  {{monster.armor_class}}</p>
-    <p><strong class="bold">Hit Points:</strong>  {{monster.hit_points}}</p>
-    <p><strong class="bold">Speed:</strong>  {{getSpeedString(monster.speed)}}</p>
+    <p class="text"><strong class="bold">Armor Class:</strong>  {{monster.armor_class}}</p>
+    <p class="text"><strong class="bold">Hit Points:</strong>  {{monster.hit_points}}</p>
+    <p class="text"><strong class="bold">Speed:</strong>  {{getSpeedString(monster.speed)}}</p>
 
     <div class="separator"></div>
 
@@ -47,19 +47,19 @@
 
     <div class="separator"></div>
 
-    <p><strong class="bold">Saving throws:</strong> {{getSavingThrowsString(monster)}}</p>
-    <p><strong class="bold">Skills:</strong>  {{getSkillsString(monster)}}</p>
-    <p><strong class="bold">Damage Resistances:</strong>  {{monster.damage_resistances}}</p>
-    <p><strong class="bold">Damage Immunities:</strong>  {{monster.damage_immunities}}</p>
-    <p><strong class="bold">Senses:</strong>  {{monster.senses}}</p>
-    <p><strong class="bold">Languages:</strong>  {{monster.languages}}</p>
-    <p><strong class="bold">Challenge:</strong>  {{monster.challenge_rating}} ({{getXPFromCR(monster.challenge_rating)}} XP)</p>
+    <p class="text"><strong class="bold">Saving throws:</strong> {{getSavingThrowsString(monster)}}</p>
+    <p class="text"><strong class="bold">Skills:</strong>  {{getSkillsString(monster)}}</p>
+    <p class="text"><strong class="bold">Damage Resistances:</strong>  {{monster.damage_resistances}}</p>
+    <p class="text"><strong class="bold">Damage Immunities:</strong>  {{monster.damage_immunities}}</p>
+    <p class="text"><strong class="bold">Senses:</strong>  {{monster.senses}}</p>
+    <p class="text"><strong class="bold">Languages:</strong>  {{monster.languages}}</p>
+    <p class="text"><strong class="bold">Challenge:</strong>  {{monster.challenge_rating}} ({{getXPFromCR(monster.challenge_rating)}} XP)</p>
 
     <div class="separator"></div>
 
     <p class="sub-title title-footer bold">Actions</p>
     <div v-for="action in monster.actions" :key="action.name">
-      <p class="action-text"><strong class="bold">{{action.name}}.</strong> {{action.desc}}</p>
+      <p class="action-text text"><strong class="bold">{{action.name}}.</strong> {{action.desc}}</p>
     </div>
 
     <p>{{monster}}</p>
@@ -146,4 +146,5 @@ export default {
   .action-text {
     margin-top: 4px;
   }
+
 </style>
