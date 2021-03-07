@@ -147,4 +147,7 @@ export default {
     margin-top: 4px;
   }
 
+  .background {
+    background-color: $tertiary;
+  }
 </style>

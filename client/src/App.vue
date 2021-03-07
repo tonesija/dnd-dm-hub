@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <b-navbar type="is-primary" shadow>
+    <b-navbar type="is-primary" shadow centered>
         <template #brand>
             <b-navbar-item tag="router-link" :to="{ path: '/' }">
                 <img
@@ -8,35 +8,52 @@
                     alt="Lightweight UI components for Vue.js based on Bulma"
                 >
             </b-navbar-item>
+            <b-navbar-item tag="div">
+                <b-field>
+                    <b-input icon="search" size="is-small" type="search"></b-input>
+                    <p class="control">
+                        <b-button size="is-small" class="button is-tertiary">Search</b-button>
+                    </p>
+                </b-field>
+            </b-navbar-item>
         </template>
         <template #start>
             <b-navbar-item class="bold" tag="router-link" :to="{path: '/'}">
-                Home
+                Home (TODO)
             </b-navbar-item>
             <b-navbar-item class="bold" tag="router-link" :to="{path: '/monsters'}">
                 Monsters
+            </b-navbar-item>
+            <b-navbar-item class="bold" tag="router-link" :to="{path: '/spells'}">
+                Spells (TODO)
+            </b-navbar-item>
+            <b-navbar-item class="bold" tag="router-link" :to="{path: '/races'}">
+                Races (TODO)
+            </b-navbar-item>
+            <b-navbar-item class="bold" tag="router-link" :to="{path: '/classes'}">
+                Classes (TODO)
             </b-navbar-item>
             <b-navbar-dropdown class="bold" label="Tools">
                 <b-navbar-item tag="router-link" :to="{path: '/combat-tracker'}">
                     Combat tracker
                 </b-navbar-item>
                 <b-navbar-item tag="router-link" :to="{path: '/treasure-generator'}">
-                    Treasure generator
+                    Treasure generator (TODO)
                 </b-navbar-item>
             </b-navbar-dropdown>
             <b-navbar-dropdown class="bold" label="Info">
                 <b-navbar-item href="#">
-                    About
+                    About (TODO)
                 </b-navbar-item>
                 <b-navbar-item href="#">
-                    Contact
+                    Contact (TODO)
                 </b-navbar-item>
             </b-navbar-dropdown>
         </template>
 
         <template #end>
             <b-navbar-item tag="div">
-
+                Nesto (TODO)
             </b-navbar-item>
         </template>
     </b-navbar>
