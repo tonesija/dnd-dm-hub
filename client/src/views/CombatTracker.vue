@@ -4,6 +4,7 @@
 
     <b-table
     :data="data"
+    v-show="data.length != 0"
     hoverable
     narrowed
     class="bold">
@@ -32,10 +33,11 @@
 
     <div class="separator"></div>
 
-    <b-field class="bold" grouped group-multiline label="Add a creature">
-        <b-field class="margin-top">
-            <b-checkbox v-model="isPlayer"></b-checkbox>
-        </b-field>
+    <p class="sub-title title-footer bold margin-top">Add a creature
+        <span class="small-text">Is player: </span>
+        <b-switch size="is-small" v-model="isPlayer"></b-switch>
+    </p>
+    <b-field class="bold" grouped group-multiline>
         <b-field class="margin-top" label="Creature" label-position="on-border">
             <b-autocomplete 
             placeholder="Creature name" 
@@ -48,20 +50,22 @@
           </b-autocomplete>
         </b-field>
         <b-field class="margin-top" label="Initiative" label-position="on-border">
-            <b-numberinput controls-position="compact"
+            <b-numberinput controls-position="compact" type="is-tertiary"
             v-model="newInitiative"></b-numberinput>
         </b-field>
         <b-field class="margin-top" label="Hit points" label-position="on-border">
-            <b-numberinput controls-position="compact"
+            <b-numberinput controls-position="compact" type="is-tertiary"
             v-model="newHP"></b-numberinput>
         </b-field>
+
   
         <b-field class="margin-top" expanded>
             <b-button class="bold" type="is-primary" @click="addCreature" icon-right="plus">Add</b-button>
         </b-field>
     </b-field>
 
-    <p class="sub-title title-footer bold margin-top">Monster sheets</p>
+    <p v-show="monsters.length != 0"
+      class="sub-title title-footer bold margin-top">Monster sheets</p>
     <b-tabs type="is-boxed" class="bold"
       v-if="monsters.length != 0" v-model="activeTab">
         <b-tab-item v-for="mon in monsters" :key="mon.slug">
@@ -225,5 +229,9 @@ export default {
   }
   .margin-top {
     margin-top: 1em;
+  }
+  .small-text {
+    margin-left: 1em;
+    font-size: 20px;
   }
 </style>
